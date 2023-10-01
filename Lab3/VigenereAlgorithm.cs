@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
-using System.Text;
 
-namespace CS.Lab2;
+namespace CS.Lab3;
 
 public class VigenereAlgorithm
 {

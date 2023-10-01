@@ -1,4 +1,4 @@
-﻿using CS.Lab2;
+﻿using CS.Lab3;
 using Spectre.Console;
 const string ENCRYPT = "Encrypt";
 const string DECRYPT = "Decrypt";
