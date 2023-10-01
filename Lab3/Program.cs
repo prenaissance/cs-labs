@@ -10,7 +10,7 @@ string PromptEncryptOrDecrypt() => AnsiConsole.Prompt(
 );
 
 string PromptKey() => AnsiConsole.Prompt(
-    new TextPrompt<string>("Enter the dictionary key:")
+    new TextPrompt<string>("Enter the encryption key:")
         .PromptStyle("red")
         .Validate(text =>
         {
@@ -18,9 +18,9 @@ string PromptKey() => AnsiConsole.Prompt(
             if (normalizedText.Length == 0)
                 return ValidationResult.Error("[red]The dictionary key cannot be empty[/]");
             if (normalizedText.Any(c => !char.IsLetter(c)))
-                return ValidationResult.Error("[red]The dictionary key must contain only letters[/]");
+                return ValidationResult.Error("[red]The encryption key must contain only letters[/]");
             if (normalizedText.Length < 7)
-                return ValidationResult.Error("[red]The dictionary key must be >= 7 characters long[/]");
+                return ValidationResult.Error("[red]The encryption key must be >= 7 characters long[/]");
             return ValidationResult.Success();
         })
 );
@@ -45,7 +45,6 @@ string PromptPlainText() => AnsiConsole.Prompt(
 string PromptEncryptedText() => AnsiConsole.Prompt(
     new TextPrompt<string>("Enter the encrypted text:")
         .PromptStyle("red")
-        .Secret()
         .Validate(ValidateInputText)
 );
 
