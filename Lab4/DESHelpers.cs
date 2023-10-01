@@ -4,7 +4,7 @@ namespace CS.Lab4;
 
 public static class DESHelpers
 {
-    private static int[] DoubleShiftIndices = new[]
+    private readonly static int[] doubleShiftIndices = new[]
     {
         1, 2, 9, 16
     };
@@ -23,7 +23,7 @@ public static class DESHelpers
             byte b2Part = (byte)(b2 >> 7);
             shiftedBytes[i] = (byte)(b1Part | b2Part);
         }
-        shiftedBytes[3] = (byte)(bytes[3] << 1 | bytes[0] >> 3);
+        shiftedBytes[3] = (byte)((bytes[3] << 1 | bytes[0] >> 3) & 0xF0);
         return DESCircularLeftShift(shiftedBytes, shifts - 1);
     }
     //
@@ -74,7 +74,7 @@ public static class DESHelpers
         }
         dKey[3] = (byte)(desKey[6] << 4);
 
-        int totalShifts = round + DoubleShiftIndices.Count(i => i <= round);
+        int totalShifts = round + doubleShiftIndices.Count(i => i <= round);
         cKey = DESCircularLeftShift(cKey, totalShifts);
         dKey = DESCircularLeftShift(dKey, totalShifts);
         return (cKey, dKey);
